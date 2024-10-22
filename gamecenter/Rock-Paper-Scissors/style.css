@@ -26,8 +26,8 @@ body {
 .choices {
     display: flex;
     justify-content: center;
-    margin-bottom: 60px;
-    gap: 15px; /* ボタン間のスペース */
+    margin-bottom: 80px;
+    gap: 20px; /* ボタン間のスペース */
 }
 
 /* じゃんけんの選択ボタン */
@@ -50,7 +50,7 @@ body {
 
 /* 結果表示のスタイル */
 .results {
-    font-size: 200px; /* 視認性向上のためフォントサイズを大きく */
+    font-size: 50px; /* 視認性向上のためフォントサイズを大きく */
     margin-top: 20px;
     color: #adff2f; /* 黄緑文字 */
 }
