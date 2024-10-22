@@ -1,15 +1,14 @@
-// ナビゲーションリンクのスムーズスクロール
-document.querySelectorAll('nav a').forEach(anchor => {
+document.querySelectorAll('.nav a').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        e.preventDefault(); // デフォルトのリンク動作を防止
-        const targetId = this.getAttribute('href').substring(1); // リンク先ID取得
-        const targetElement = document.getElementById(targetId); // IDで要素を取得
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
 
         if (targetElement) {
-            const headerHeight = document.querySelector('header').offsetHeight; // ヘッダーの高さを取得
+            const headerHeight = document.querySelector('header').offsetHeight;
             window.scrollTo({
-                top: targetElement.offsetTop - headerHeight, // ヘッダー分を引いてスクロール
-                behavior: 'smooth' // スムーズスクロール
+                top: targetElement.offsetTop - headerHeight,
+                behavior: 'smooth'
             });
         }
     });
