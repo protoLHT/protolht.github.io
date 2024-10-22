@@ -1,46 +1,79 @@
-/* 全体のスタイル */
+/* 全体の背景やフォント設定 */
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
-    color: #333;
-    text-align: center;
+    background-color: #000; /* 黒背景 */
+    color: #adff2f; /* 黄緑文字 */
 }
 
+/* ヘッダーのスタイル */
 .header {
-    background-color: #4CAF50;
-    padding: 20px;
-    color: white;
-    margin-bottom: 20px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 10vh;
+    background-color: #000; /* 黒背景 */
+    color: #adff2f; /* 黄緑文字 */
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    z-index: 2;
 }
 
-.game-container {
-    margin: 20px;
+.header h1 {
+    margin: 0;
+    letter-spacing: 6px;
+    font-family: 'Poppins', sans-serif;
+    color: #adff2f; /* 黄緑文字 */
 }
 
-.choices {
+/* コンテンツのスタイル */
+.container {
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
+    max-width: 100%;
+    margin-top: 15vh; /* ヘッダーの高さ分スペースを追加 */
 }
 
+.content {
+    text-align: center;
+    padding: 20px;
+    margin: 10px;
+    background-color: #1a1a1a; /* 黒に近いグレーの背景 */
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(173, 255, 47, 0.5); /* 黄緑の影 */
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.content:hover {
+    transform: translateY(-10px);
+    background-color: #adff2f; /* ホバー時に黄緑 */
+    color: #000; /* ホバー時は黒文字 */
+}
+
+/* じゃんけんの選択ボタン */
 .choice-btn {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 15px 30px;
-    margin: 0 10px;
-    font-size: 18px;
+    background-color: #000; /* 黒背景 */
+    color: #adff2f; /* 黄緑文字 */
+    border: 2px solid #adff2f; /* 黄緑のボーダー */
+    padding: 10px 25px;
+    margin: 5px;
+    font-size: 20px;
     cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+    border-radius: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
 .choice-btn:hover {
-    background-color: #45a049;
+    transform: scale(1.2);
+    box-shadow: 0 8px 25px rgba(173, 255, 47, 0.6); /* 黄緑の影 */
+    background-color: #adff2f; /* ホバー時に黄緑 */
+    color: #000; /* ホバー時は黒文字 */
 }
 
+/* 結果表示のスタイル */
 .results {
     font-size: 18px;
     margin-top: 20px;
@@ -48,5 +81,5 @@ body {
 
 .results span {
     font-weight: bold;
-    color: #4CAF50;
+    color: #adff2f;
 }
