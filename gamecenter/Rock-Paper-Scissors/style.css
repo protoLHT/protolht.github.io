@@ -4,7 +4,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #000; /* 黒背景 */
-    color: #adff2f; /* 黄緑文字 */
+    color: #00ff00; /* 緑文字 */
 }
 
 /* ヘッダーのスタイル */
@@ -15,7 +15,7 @@ body {
     left: 0;
     height: 10vh;
     background-color: #000; /* 黒背景 */
-    color: #adff2f; /* 黄緑文字 */
+    color: #00ff00; /* 緑文字 */
     display: flex;
     align-items: center;
     padding-left: 20px;
@@ -26,19 +26,15 @@ body {
     margin: 0;
     letter-spacing: 6px;
     font-family: 'Poppins', sans-serif;
-    color: #adff2f; /* 黄緑文字 */
+    color: #00ff00; /* 緑文字 */
 }
 
 /* コンテンツのスタイル */
 .container {
     display: flex;
-    flex-direction: column; /* 縦方向にコンテンツを並べる */
-    align-items: center; /* 水平中央揃え */
     justify-content: center;
     max-width: 100%;
-    height: 100vh; /* コンテナの高さを画面いっぱいに */
-    padding-top: 15vh; /* ヘッダーの高さ分のスペースを確保 */
-    box-sizing: border-box;
+    margin-top: 15vh; /* ヘッダーの高さ分スペースを追加 */
 }
 
 .content {
@@ -47,29 +43,23 @@ body {
     margin: 10px;
     background-color: #1a1a1a; /* 黒に近いグレーの背景 */
     border-radius: 15px;
-    box-shadow: 0 6px 12px rgba(173, 255, 47, 0.5); /* 黄緑の影 */
+    box-shadow: 0 6px 12px rgba(0, 255, 0, 0.5); /* 緑の影 */
     transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
 .content:hover {
     transform: translateY(-10px);
-    background-color: #adff2f; /* ホバー時に黄緑 */
+    background-color: #00ff00; /* ホバー時に緑 */
     color: #000; /* ホバー時は黒文字 */
 }
 
 /* じゃんけんの選択ボタン */
-.choices {
-    display: flex;
-    justify-content: center;
-    gap: 15px; /* ボタン間の余白を追加 */
-    margin-top: 20px; /* ボタンを少し下に */
-}
-
 .choice-btn {
     background-color: #000; /* 黒背景 */
-    color: #adff2f; /* 黄緑文字 */
-    border: 2px solid #adff2f; /* 黄緑のボーダー */
+    color: #00ff00; /* 緑文字 */
+    border: 2px solid #00ff00; /* 緑のボーダー */
     padding: 10px 25px;
+    margin: 5px;
     font-size: 20px;
     cursor: pointer;
     border-radius: 30px;
@@ -78,8 +68,8 @@ body {
 
 .choice-btn:hover {
     transform: scale(1.2);
-    box-shadow: 0 8px 25px rgba(173, 255, 47, 0.6); /* 黄緑の影 */
-    background-color: #adff2f; /* ホバー時に黄緑 */
+    box-shadow: 0 8px 25px rgba(0, 255, 0, 0.6); /* 緑の影 */
+    background-color: #00ff00; /* ホバー時に緑 */
     color: #000; /* ホバー時は黒文字 */
 }
 
@@ -91,5 +81,5 @@ body {
 
 .results span {
     font-weight: bold;
-    color: #adff2f;
+    color: #00ff00; /* 緑文字 */
 }
