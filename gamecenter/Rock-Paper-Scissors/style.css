@@ -32,10 +32,13 @@ body {
 /* コンテンツのスタイル */
 .container {
     display: flex;
+    flex-direction: column; /* 縦方向にコンテンツを並べる */
+    align-items: center; /* 水平中央揃え */
     justify-content: center;
     max-width: 100%;
-    margin-top: 15vh; /* ヘッダーの高さ分スペースを追加 */
-    padding: 20px; /* コンテンツ周りに余白を追加 */
+    height: 100vh; /* コンテナの高さを画面いっぱいに */
+    padding-top: 15vh; /* ヘッダーの高さ分のスペースを確保 */
+    box-sizing: border-box;
 }
 
 .content {
