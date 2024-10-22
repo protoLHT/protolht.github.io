@@ -86,13 +86,6 @@ body {
     color: #000; /* ホバー時は黒文字 */
 }
 
-.content img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    margin-bottom: 15px;
-}
-
 .content a {
     text-decoration: none;
     color: #adff2f; /* 黄緑文字 */
