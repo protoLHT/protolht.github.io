@@ -32,36 +32,35 @@ body {
 /* コンテンツのスタイル */
 .container {
     display: flex;
-    flex-wrap: wrap; /* 複数行に対応 */
-    justify-content: center; /* コンテンツを中央に配置 */
+    justify-content: center;
+    flex-wrap: wrap;
     max-width: 100%;
     margin-top: 15vh; /* ヘッダーの高さ分スペースを追加 */
+    gap: 20px; /* ボタン間の余白を設定 */
 }
 
 .content {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 20px; /* ボタン間の余白 */
     text-align: center;
-    padding: 20px;
-    background-color: #1a1a1a; /* 黒に近いグレーの背景 */
-    border-radius: 15px;
-    box-shadow: 0 6px 12px rgba(173, 255, 47, 0.5); /* 黄緑の影 */
-    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    gap: 20px;
 }
 
 .content a {
     text-decoration: none;
     color: #adff2f; /* 黄緑文字 */
     font-weight: bold;
-    padding: 10px 25px;
+    padding: 20px; /* すべてのボタンのサイズを統一 */
+    width: 200px; /* ボタンの幅を固定 */
+    height: 60px; /* ボタンの高さを固定 */
     cursor: pointer;
     border: 2px solid #adff2f; /* 黄緑のボーダー */
     border-radius: 20px;
-    flex-basis: calc(33.33% - 40px); /* 3つずつ横に並べる */
-    max-width: calc(33.33% - 40px); /* ボタンの最大幅 */
     transition: background-color 0.3s ease, color 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .content a:hover {
@@ -84,8 +83,11 @@ body {
 
 /* レスポンシブ対応 */
 @media screen and (max-width: 768px) {
+    .content {
+        flex-wrap: wrap;
+    }
+
     .content a {
-        flex-basis: calc(50% - 20px); /* モバイルでは2列にする */
-        max-width: calc(50% - 20px);
+        width: 100%; /* モバイルではボタンが幅いっぱいに */
     }
 }
