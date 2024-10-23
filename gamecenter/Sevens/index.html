@@ -3,106 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>七並べ</title>
-    <style>
-        /* ここにCSSを追加 */
-        .suit-row {
-            display: flex;
-            justify-content: center;
-            margin: 10px 0;
-        }
-
-        .suit-row span {
-            padding: 5px;
-            width: 30px;
-            text-align: center;
-            border: 1px solid #d4ff88;
-            margin-right: 5px;
-            border-radius: 5px;
-            background-color: #333;
-            color: #d4ff88;
-        }
-
-        .suit-row span:not(:last-child) {
-            margin-right: 8px;
-        }
-
-        /* 全体の背景やフォント設定 */
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #111; /* 少し明るめの黒 */
-            color: #d4ff88; /* 落ち着いた緑色 */
-        }
-
-        /* ヘッダーのスタイル */
-        .header {
-            text-align: center;
-            padding: 20px;
-            background-color: #222; /* ヘッダー背景も少し明るめの黒 */
-            color: #d4ff88;
-            font-size: 2em;
-        }
-
-        /* ゲームコンテナのスタイル */
-        .game-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin-top: 20px;
-            padding: 20px;
-        }
-
-        .hand, .table, .message {
-            margin: 20px 0;
-            padding: 10px;
-            background-color: #333; /* 暗いグレー */
-            border-radius: 10px;
-            box-shadow: 0 6px 12px rgba(212, 255, 136, 0.5);
-            width: 80%;
-            text-align: center;
-            color: #d4ff88;
-        }
-
-        /* ボタンの色合いを調整 */
-        .actions {
-            display: flex;
-            gap: 20px;
-        }
-
-        .game-btn {
-            background-color: #333; /* 背景を少し明るく */
-            border: 2px solid #d4ff88;
-            color: #d4ff88;
-            padding: 10px 20px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-        }
-
-        .game-btn:hover {
-            background-color: #d4ff88;
-            color: #111; /* ホバー時の文字色はダークに */
-            transform: scale(1.1);
-        }
-    </style>
+    <title>七並べゲーム</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="header">
-        <h1>七並べ</h1>
-    </header>
-
-    <div class="game-container">
-        <div class="hand" id="playerHand">あなたの手札: </div>
-        <div class="table" id="gameTable">場:</div> <!-- ここにカードを表示 -->
-        <div class="message" id="gameMessage">ゲーム開始！</div>
-        <div class="actions">
-            <button id="passBtn" class="game-btn">パス</button>
-        </div>
-    </div>
-
-    <script src="javascript.js"></script> <!-- 外部スクリプト -->
+    <h1>七並べゲーム</h1>
+    <div id="game-board"></div>
+    <button id="start-game">ゲームスタート</button>
+    <div id="message"></div>
+    <script src="script.js"></script>
 </body>
 </html>
