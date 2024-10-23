@@ -1,103 +1,158 @@
-/* 全体の背景やフォント設定 */
-body {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #000; /* 黒背景 */
-    color: #adff2f; /* 黄緑文字 */
-}
+<head>
+    <style>
+    /* 全体の背景やフォント設定 */
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #000; /* 黒背景 */
+        color: #adff2f; /* 黄緑文字 */
+    }
 
-/* ヘッダーのスタイル */
-.header {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    height: 10vh;
-    background-color: #000; /* 黒背景 */
-    color: #adff2f; /* 黄緑文字 */
-    display: flex;
-    align-items: center;
-    padding-left: 20px;
-    z-index: 2;
-}
+    /* ヘッダーのスタイル */
+    .header {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        height: 10vh;
+        background-color: #000; /* 黒背景 */
+        color: #adff2f; /* 黄緑文字 */
+        display: flex;
+        align-items: center;
+        padding-left: 20px;
+        z-index: 2;
+    }
 
-.header h1 {
-    margin: 0;
-    letter-spacing: 6px;
-    font-family: 'Poppins', sans-serif;
-    color: #adff2f; /* 黄緑文字 */
-}
+    .header h1 {
+        margin: 0;
+        letter-spacing: 6px;
+        font-family: 'Poppins', sans-serif;
+        color: #adff2f; /* 黄緑文字 */
+    }
 
-/* ナビゲーションリンクのスタイル */
-.nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    background-color: #000; /* 黒背景 */
-}
+    /* ナビゲーションリンクのスタイル */
+    .nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        background-color: #000; /* 黒背景 */
+    }
 
-.nav a {
-    text-decoration: none;
-    color: #adff2f; /* 黄緑文字 */
-    font-weight: bold;
-    font-size: 18px;
-    cursor: pointer;
-    padding: 10px 25px;
-    background-color: #000; /* 黒背景 */
-    border: 2px solid #adff2f; /* 黄緑のボーダー */
-    border-radius: 30px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
-}
+    .nav a {
+        text-decoration: none;
+        color: #adff2f; /* 黄緑文字 */
+        font-weight: bold;
+        font-size: 18px;
+        cursor: pointer;
+        padding: 10px 25px;
+        background-color: #000; /* 黒背景 */
+        border: 2px solid #adff2f; /* 黄緑のボーダー */
+        border-radius: 30px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    }
 
-.nav a:hover {
-    transform: scale(1.2);
-    box-shadow: 0 8px 25px rgba(173, 255, 47, 0.6); /* 黄緑の影 */
-    background-color: #adff2f; /* ホバー時に黄緑 */
-    color: #000; /* ホバー時は黒文字 */
-}
+    .nav a:hover {
+        transform: scale(1.2);
+        box-shadow: 0 8px 25px rgba(173, 255, 47, 0.6); /* 黄緑の影 */
+        background-color: #adff2f; /* ホバー時に黄緑 */
+        color: #000; /* ホバー時は黒文字 */
+    }
 
-/* コンテンツのスタイル */
-.container {
-    display: flex;
-    justify-content: space-between;
-    max-width: 100%;
-    margin: 20px auto;
-    margin-top: 15vh; /* ヘッダーの高さ分スペースを追加 */
-}
+    /* コンテナをflexで調整し、横並びになるように設定 */
+    .container {
+        display: flex;
+        flex-wrap: wrap; /* 横幅が足りない場合、次の行に折り返す */
+        justify-content: space-between;
+        gap: 20px; /* 各コンテンツ間に余白を追加 */
+        max-width: 1200px; /* 最大幅を指定 */
+        margin: 20px auto;
+        margin-top: 15vh; /* ヘッダーの高さ分スペースを追加 */
+    }
 
-.content {
-    flex: 1;
-    text-align: center;
-    padding: 20px;
-    margin: 10px;
-    background-color: #1a1a1a; /* 黒に近いグレーの背景 */
-    border-radius: 15px;
-    box-shadow: 0 6px 12px rgba(173, 255, 47, 0.5); /* 黄緑の影 */
-    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
-}
+    /* 各コンテンツを均等に広げる */
+    .content {
+        flex: 1 1 30%; /* 各要素が30%の幅を取り、3列になるように調整 */
+        text-align: center;
+        padding: 20px;
+        margin: 10px;
+        background-color: #1a1a1a; /* 黒に近いグレーの背景 */
+        border-radius: 15px;
+        box-shadow: 0 6px 12px rgba(173, 255, 47, 0.5); /* 黄緑の影 */
+        transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+        min-width: 280px; /* 各コンテンツの最小幅を指定 */
+        position: relative; /* ホバーの動作を安定させるためにpositionを追加 */
+        z-index: 1;
+    }
 
-.content:hover {
-    transform: translateY(-10px);
-    background-color: #adff2f; /* ホバー時に黄緑 */
-    color: #000; /* ホバー時は黒文字 */
-}
+    /* ホバー時にスタイルが正しく適用されるように調整 */
+    .content:hover {
+        transform: translateY(-10px);
+        background-color: #adff2f; /* ホバー時に黄緑 */
+        color: #000; /* ホバー時は黒文字 */
+        z-index: 10; /* ホバー時にコンテンツが前面に表示されるように */
+    }
 
-.content a {
-    text-decoration: none;
-    color: #adff2f; /* 黄緑文字 */
-    display: block;
-    margin-top: 15px;
-    font-weight: bold;
-    padding: 10px 25px;
-    cursor: pointer;
-    border: 2px solid #adff2f; /* 黄緑のボーダー */
-    border-radius: 20px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
+    /* ボタンを横幅一杯に広げる */
+    .content a {
+        text-decoration: none;
+        color: #adff2f; /* 黄緑文字 */
+        display: block;
+        margin-top: 15px;
+        font-weight: bold;
+        padding: 10px 25px;
+        cursor: pointer;
+        border: 2px solid #adff2f; /* 黄緑のボーダー */
+        border-radius: 20px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        width: 100%; /* ボタンをコンテンツの幅一杯に広げる */
+        box-sizing: border-box; /* ボーダーを含めて幅を計算 */
+    }
 
-.content a:hover {
-    background-color: #adff2f; /* ホバー時に黄緑 */
-    color: #000; /* ホバー時は黒文字 */
-}
+    /* ボタンホバー時にスタイルが適用されるように修正 */
+    .content a:hover {
+        background-color: #adff2f; /* ホバー時に黄緑 */
+        color: #000; /* ホバー時は黒文字 */
+    }
+
+    /* レスポンシブデザイン */
+    @media (max-width: 768px) {
+        .container {
+            flex-direction: column; /* コンテンツを縦に並べる */
+        }
+
+        .content {
+            flex: 1 1 100%; /* 幅を100%にして1列表示にする */
+        }
+    }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>My Website</h1>
+        <nav class="nav">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </nav>
+    </div>
+
+    <div class="container">
+        <div class="content">
+            <h2>Content 1</h2>
+            <p>This is the first content block.</p>
+            <a href="#">Read More</a>
+        </div>
+        <div class="content">
+            <h2>Content 2</h2>
+            <p>This is the second content block.</p>
+            <a href="#">Read More</a>
+        </div>
+        <div class="content">
+            <h2>Content 3</h2>
+            <p>This is the third content block.</p>
+            <a href="#">Read More</a>
+        </div>
+    </div>
+</body>
