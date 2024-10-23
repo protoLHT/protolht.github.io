@@ -3,19 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>七並べゲーム</title>
+    <title>七並べ</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>七並べゲーム</h1>
-    
-    <h2>場</h2>
-    <div id="game-board"></div>
-
-    <h2>手札</h2>
-    <div id="hand-board"></div>
-
+    <h1>七並べ</h1>
+    <div id="board">
+        <div id="spades" class="suit">♠ 1 2 3 4 5 6 7 8 9 10 J Q K</div>
+        <div id="diamonds" class="suit">♢ 1 2 3 4 5 6 7 8 9 10 J Q K</div>
+        <div id="clubs" class="suit">♣ 1 2 3 4 5 6 7 8 9 10 J Q K</div>
+        <div id="hearts" class="suit">♡ 1 2 3 4 5 6 7 8 9 10 J Q K</div>
+    </div>
+    <div id="controls">
+        <button id="passButton" onclick="playerPass()">パス</button>
+        <div id="playerCards"></div>
+    </div>
     <div id="message"></div>
+
     <script src="script.js"></script>
 </body>
 </html>
