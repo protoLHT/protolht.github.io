@@ -1,4 +1,4 @@
-/* 全体のスタイル */
+/* 全体の背景やフォント設定 */
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
@@ -8,23 +8,27 @@ body {
     text-align: center;
 }
 
+/* ヘッダーのスタイル */
 .header {
     background-color: #000; /* 黒背景 */
     color: #adff2f; /* 黄緑文字 */
     padding: 20px;
     margin-bottom: 20px;
-    border-bottom: 2px solid #adff2f;
+    border-bottom: 2px solid #adff2f; /* 下に黄緑のライン */
 }
 
+/* ゲームコンテナ */
 .game-container {
     padding: 20px;
 }
 
+/* 手札、場、メッセージのスタイル */
 .hand, .table, .message {
     margin-bottom: 15px;
     font-size: 18px;
 }
 
+/* ゲーム操作ボタンのスタイル */
 .actions {
     margin-top: 20px;
 }
@@ -42,6 +46,24 @@ body {
 }
 
 .game-btn:hover {
-    background-color: #adff2f;
-    color: #000;
+    background-color: #adff2f; /* ホバー時に黄緑 */
+    color: #000; /* ホバー時は黒文字 */
+}
+
+/* 手札のカードボタンのスタイル */
+.card-btn {
+    background-color: #000; /* 黒背景 */
+    color: #adff2f; /* 黄緑文字 */
+    border: 2px solid #adff2f; /* 黄緑のボーダー */
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.card-btn:hover {
+    background-color: #adff2f; /* ホバー時に黄緑 */
+    color: #000; /* ホバー時に黒文字 */
 }
