@@ -10,16 +10,16 @@ function initializeGame() {
     const deck = createDeck();
     shuffle(deck);
 
-    // Deal cards
+    // Deal cards to players
     for (let i = 0; i < deck.length; i++) {
         if (i % 4 === 0) {
-            playerHand.push(deck[i]);
+            playerHand.push(deck[i]); // Player's hand
         } else {
-            computerHands[(i % 4) - 1].push(deck[i]);
+            computerHands[(i % 4) - 1].push(deck[i]); // Computer's hands
         }
     }
 
-    // Place the initial 7s on the board
+    // Place initial 7s on the board
     suits.forEach(suit => {
         board[suit].push(7);
     });
@@ -75,16 +75,20 @@ function getSuitSymbol(suit) {
 
 function updatePlayerHand() {
     const playerDiv = document.getElementById("playerCards");
-    playerDiv.innerHTML = "";
+    playerDiv.innerHTML = "あなたの手札: "; // Reset hand display
+
     playerHand.forEach(card => {
         const cardElement = document.createElement("span");
         cardElement.className = "card";
         cardElement.textContent = `${card.rank}`;
-        cardElement.onclick = () => playCard(card);
+        cardElement.onclick = () => playCard(card); // Clickable cards
+
+        // Highlight playable cards
         if (canPlay(card)) {
             cardElement.classList.add("highlight");
         }
-        playerDiv.appendChild(cardElement);
+
+        playerDiv.appendChild(cardElement); // Append card to hand display
     });
 }
 
