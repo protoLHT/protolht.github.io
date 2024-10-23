@@ -21,6 +21,7 @@ body {
     border: 1px solid white;
     width: 30px;
     text-align: center;
+    cursor: pointer;
 }
 
 .highlight {
@@ -40,4 +41,9 @@ button {
     padding: 10px;
     font-size: 16px;
     cursor: pointer;
+}
+
+#message {
+    margin-top: 20px;
+    color: white;
 }
