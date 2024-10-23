@@ -77,7 +77,7 @@
         text-align: center;
         padding: 20px;
         margin: 10px;
-        background-color: #1a1a1a; /* 黒に近いグレーの背景 */
+        background-color: #000; /* 黒背景 */
         border-radius: 15px;
         box-shadow: 0 6px 12px rgba(173, 255, 47, 0.5); /* 黄緑の影 */
         transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
@@ -121,7 +121,7 @@
         text-align: center;
         padding: 50px 20px;
         margin: 0 auto;
-        background-color: #1a1a1a;
+        background-color: #000;
         color: #adff2f;
     }
 
