@@ -60,8 +60,8 @@ body {
 /* コンテンツのスタイル */
 .container {
     display: flex;
-    flex-wrap: wrap; /* コンテンツを複数行にする */
-    justify-content: space-between;
+    flex-wrap: wrap; /* 複数行にする */
+    justify-content: space-between; /* 横に均等配置 */
     max-width: 100%;
     margin: 20px auto;
     margin-top: 15vh; /* ヘッダーの高さ分スペースを追加 */
@@ -69,13 +69,13 @@ body {
 }
 
 .content {
-    flex: 1 1 calc(33% - 20px); /* 3列表示 */
-    max-width: calc(33% - 20px); /* 幅を3等分にする */
-    min-width: 200px; /* ボタンが小さすぎないように */
+    flex: 1 1 calc(33.33% - 20px); /* 3列表示を強制する */
+    max-width: calc(33.33% - 20px); /* 3列の最大幅を33.33%に設定 */
+    min-width: 250px; /* 最小幅を設定し、折り返しを防ぐ */
     text-align: center;
     padding: 20px;
     margin: 10px;
-    background-color: #1a1a1a; /* 黒に近いグレーの背景 */
+    background-color: #1a1a1a; /* 背景色 */
     border-radius: 15px;
     box-shadow: 0 6px 12px rgba(173, 255, 47, 0.5); /* 黄緑の影 */
     transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
@@ -106,7 +106,7 @@ body {
 }
 
 /* レスポンシブ対応 */
-/* タブレットサイズで2列表示 */
+/* 1024px以下で2列表示 */
 @media screen and (max-width: 1024px) {
     .content {
         flex: 1 1 calc(50% - 20px); /* 2列表示 */
@@ -114,10 +114,11 @@ body {
     }
 }
 
-/* スマートフォンサイズで1列表示 */
+/* 768px以下で1列表示 */
 @media screen and (max-width: 768px) {
     .content {
         flex: 1 1 100%; /* 1列表示 */
         max-width: 100%;
     }
 }
+
