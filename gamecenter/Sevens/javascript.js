@@ -1,15 +1,15 @@
 const suits = ['ハート', 'ダイヤ', 'クラブ', 'スペード'];
-const ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+const ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
 let deck = [];
 let playerHand = [];
 let computerHands = [[], [], []];
 let table = {
-    'ハート': ['7'], 'ダイヤ': ['7'], 'クラブ': ['7'], 'スペード': ['7'] // 最初にすべての7を場に出す
+    'ハート': ['7'], 'ダイヤ': ['7'], 'クラブ': ['7'], 'スペード': ['7'] // 初期状態としてすべての7を場に配置
 };
 let passCount = 0;
 let currentPlayer = 0; // 0: プレイヤー、1~3: コンピュータ
+let selectedCard = null; // プレイヤーが選んだカードを記録する
 
-// デッキを作成する
 function createDeck() {
     for (let suit of suits) {
         for (let rank of ranks) {
@@ -20,7 +20,6 @@ function createDeck() {
     }
 }
 
-// デッキをシャッフルする
 function shuffleDeck(deck) {
     for (let i = deck.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -28,7 +27,6 @@ function shuffleDeck(deck) {
     }
 }
 
-// カードを配る
 function dealCards() {
     while (deck.length) {
         playerHand.push(deck.pop());
@@ -38,53 +36,40 @@ function dealCards() {
     }
 }
 
-// テーブルを表示（♠A〜K, ♡A〜K, ♢A〜K, ♣A〜Kの順に並べる）
-function renderTable() {
-    const tableContainer = document.getElementById('gameTable');
-    tableContainer.innerHTML = ''; // 一旦初期化
-
-    // 各スートの行を作成してカードを順番に表示
-    for (let suit of suits) {
-        const suitDiv = document.createElement('div'); // スートごとの行
-        suitDiv.className = 'suit-row';
-
-        for (let rank of ranks) {
-            const cardSpan = document.createElement('span');
-            const card = `${suit}${rank}`;
-            
-            // そのカードが出されていれば表示、出されていなければ「-」
-            if (table[suit].includes(rank)) {
-                cardSpan.textContent = rank;
-            } else {
-                cardSpan.textContent = '-'; // 未出のカード
-            }
-            suitDiv.appendChild(cardSpan);
-        }
-
-        tableContainer.appendChild(suitDiv);
-    }
-}
-
-// プレイヤーの手札を表示する
 function renderHand() {
     const playerHandDiv = document.getElementById('playerHand');
-    playerHandDiv.innerHTML = ''; // 初期化
-    playerHand.forEach(card => {
+    playerHandDiv.innerHTML = 'あなたの手札: ';
+    
+    playerHand.forEach((card, index) => {
         const cardButton = document.createElement('button');
         cardButton.textContent = card;
-        cardButton.className = 'card-btn';
-        cardButton.addEventListener('click', () => playCard(card)); // 選択したカードをプレイ
+        cardButton.classList.add('card-btn');
+        cardButton.onclick = () => selectCard(index); // クリック時にカードを選択
         playerHandDiv.appendChild(cardButton);
     });
 }
 
-// メッセージを更新する
+function renderTable() {
+    const gameTableDiv = document.getElementById('gameTable');
+    let tableDisplay = '場: ';
+    for (let suit in table) {
+        tableDisplay += `${suit}: ${table[suit].join(', ')} | `;
+    }
+    gameTableDiv.innerHTML = tableDisplay;
+}
+
 function updateMessage(msg) {
     const gameMessage = document.getElementById('gameMessage');
     gameMessage.innerHTML = msg;
 }
 
-// カードがプレイ可能か確認する
+// カードを選択する関数
+function selectCard(index) {
+    selectedCard = playerHand[index];
+    updateMessage(`${selectedCard} を選択しました。カードを出すには「カードを出す」ボタンを押してください。`);
+}
+
+// 場に出せるカードかどうかを判定する関数
 function canPlayCard(card) {
     const suit = card.slice(0, -1); // スートを取得
     const rank = card.slice(-1); // カードのランク（数字）を取得
@@ -102,36 +87,77 @@ function canPlayCard(card) {
     return cardIndex === minTableRank - 1 || cardIndex === maxTableRank + 1;
 }
 
-// プレイヤーがカードを出す
-function playCard(card) {
-    if (canPlayCard(card)) {
-        const suit = card.slice(0, -1); // スートを取得
-        const rank = card.slice(-1);
-        table[suit].push(rank); // 場にカードを追加
-        table[suit].sort((a, b) => ranks.indexOf(a) - ranks.indexOf(b)); // 順番にソート
-        playerHand = playerHand.filter(c => c !== card); // プレイヤーの手札からカードを削除
-        renderHand();
-        renderTable();
-        updateMessage(`${card} を出しました。`);
+// カードを出す処理
+function playCard() {
+    if (!selectedCard) {
+        updateMessage('まずカードを選択してください。');
+        return;
+    }
+
+    if (playerHand.includes(selectedCard)) {
+        // カードが出せるかチェック
+        if (canPlayCard(selectedCard)) {
+            const suit = selectedCard.slice(0, -1); // スートを取得
+            table[suit].push(selectedCard); // 場にカードを追加
+            table[suit].sort((a, b) => ranks.indexOf(a) - ranks.indexOf(b)); // 順番にソート
+            playerHand = playerHand.filter(card => card !== selectedCard); // 手札から削除
+            selectedCard = null; // 選択リセット
+            renderHand(); // 手札の再描画
+            renderTable(); // テーブルの再描画
+            updateMessage('カードを出しました。');
+        } else {
+            updateMessage(`${selectedCard} は場に出せません。`);
+        }
     } else {
-        updateMessage(`${card} は場に出せません。`);
+        updateMessage('選択したカードは手札にありません。');
     }
 
     if (playerHand.length === 0) {
         updateMessage('全ての手札を出しました。あなたの勝利です！');
         endGame();
     } else {
-        nextTurn();
+        nextTurn(); // 次のプレイヤーのターンに進む
     }
 }
 
-// 次のターンに進む
+function computerPlayCard(computerIndex) {
+    if (computerHands[computerIndex].length === 0) {
+        updateMessage(`コンピュータ${computerIndex + 1}の勝利です！`);
+        endGame();
+        return;
+    }
+
+    const card = computerHands[computerIndex].pop();
+
+    if (canPlayCard(card)) {
+        const suit = card.slice(0, -1); // スートを取得
+        table[suit].push(card); // 場にカードを追加
+        table[suit].sort((a, b) => ranks.indexOf(a) - ranks.indexOf(b)); // 順番にソート
+        renderTable();
+        updateMessage(`コンピュータ${computerIndex + 1}が ${card} を出しました。`);
+    } else {
+        computerHands[computerIndex].push(card); // 出せない場合は手札に戻す
+        updateMessage(`コンピュータ${computerIndex + 1}はパスしました。`);
+    }
+}
+
+function pass() {
+    passCount++;
+    if (passCount >= 5) {
+        updateMessage('5回パスしました。あなたの負けです！');
+        endGame();
+    } else {
+        updateMessage(`パスしました。残りパス回数: ${5 - passCount}`);
+    }
+    nextTurn(); // 次のプレイヤーのターンに進む
+}
+
 function nextTurn() {
-    if (currentPlayer === 0) {
-        currentPlayer = 1; // 次はコンピュータ1のターン
-    } else if (currentPlayer === 1 || currentPlayer === 2 || currentPlayer === 3) {
-        computerPlayCard(currentPlayer - 1); // コンピュータの手札からカードを出す
-        currentPlayer = (currentPlayer + 1) % 4; // 次のプレイヤーに回す
+    while (currentPlayer !== 0) {
+        if (currentPlayer === 1 || currentPlayer === 2 || currentPlayer === 3) {
+            computerPlayCard(currentPlayer - 1); // コンピュータの手札からカードを出す
+            currentPlayer = (currentPlayer + 1) % 4; // 次のプレイヤーに回す
+        }
     }
 
     if (currentPlayer === 0) {
@@ -139,24 +165,18 @@ function nextTurn() {
     }
 }
 
-// ゲームを終了する
 function endGame() {
     document.getElementById('passBtn').disabled = true;
+    document.getElementById('playBtn').disabled = true;
 }
 
-// パス機能の追加
-function pass() {
-    passCount++;
-    updateMessage('パスしました。');
-}
-
-// イベントリスナーの設定
 document.getElementById('passBtn').addEventListener('click', () => {
     pass();
     nextTurn(); // パスした後も次のプレイヤーに進む
 });
 
-// ゲームの初期設定
+document.getElementById('playBtn').addEventListener('click', playCard);
+
 createDeck();
 shuffleDeck(deck);
 dealCards();
