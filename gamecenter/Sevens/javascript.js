@@ -1,6 +1,5 @@
-// 手札とテーブルの設定、デッキの初期化
 const suits = ['ハート', 'ダイヤ', 'クラブ', 'スペード'];
-const ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+const ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
 let deck = [];
 let playerHand = [];
 let computerHands = [[], [], []];
@@ -39,10 +38,37 @@ function dealCards() {
     }
 }
 
+// テーブルを表示（♠A〜K, ♡A〜K, ♢A〜K, ♣A〜Kの順に並べる）
+function renderTable() {
+    const tableContainer = document.getElementById('gameTable');
+    tableContainer.innerHTML = ''; // 一旦初期化
+
+    // 各スートの行を作成してカードを順番に表示
+    for (let suit of suits) {
+        const suitDiv = document.createElement('div'); // スートごとの行
+        suitDiv.className = 'suit-row';
+
+        for (let rank of ranks) {
+            const cardSpan = document.createElement('span');
+            const card = `${suit}${rank}`;
+            
+            // そのカードが出されていれば表示、出されていなければ「-」
+            if (table[suit].includes(rank)) {
+                cardSpan.textContent = rank;
+            } else {
+                cardSpan.textContent = '-'; // 未出のカード
+            }
+            suitDiv.appendChild(cardSpan);
+        }
+
+        tableContainer.appendChild(suitDiv);
+    }
+}
+
 // プレイヤーの手札を表示する
 function renderHand() {
     const playerHandDiv = document.getElementById('playerHand');
-    playerHandDiv.innerHTML = '';
+    playerHandDiv.innerHTML = ''; // 初期化
     playerHand.forEach(card => {
         const cardButton = document.createElement('button');
         cardButton.textContent = card;
@@ -50,16 +76,6 @@ function renderHand() {
         cardButton.addEventListener('click', () => playCard(card)); // 選択したカードをプレイ
         playerHandDiv.appendChild(cardButton);
     });
-}
-
-// テーブルの状況を表示する
-function renderTable() {
-    const gameTableDiv = document.getElementById('gameTable');
-    let tableDisplay = '場: ';
-    for (let suit in table) {
-        tableDisplay += `${suit}: ${table[suit].join(', ')} | `;
-    }
-    gameTableDiv.innerHTML = tableDisplay;
 }
 
 // メッセージを更新する
@@ -90,7 +106,8 @@ function canPlayCard(card) {
 function playCard(card) {
     if (canPlayCard(card)) {
         const suit = card.slice(0, -1); // スートを取得
-        table[suit].push(card); // 場にカードを追加
+        const rank = card.slice(-1);
+        table[suit].push(rank); // 場にカードを追加
         table[suit].sort((a, b) => ranks.indexOf(a) - ranks.indexOf(b)); // 順番にソート
         playerHand = playerHand.filter(c => c !== card); // プレイヤーの手札からカードを削除
         renderHand();
@@ -105,28 +122,6 @@ function playCard(card) {
         endGame();
     } else {
         nextTurn();
-    }
-}
-
-// コンピュータのカードプレイ
-function computerPlayCard(computerIndex) {
-    if (computerHands[computerIndex].length === 0) {
-        updateMessage(`コンピュータ${computerIndex + 1}の勝利です！`);
-        endGame();
-        return;
-    }
-
-    const card = computerHands[computerIndex].pop();
-
-    if (canPlayCard(card)) {
-        const suit = card.slice(0, -1); // スートを取得
-        table[suit].push(card); // 場にカードを追加
-        table[suit].sort((a, b) => ranks.indexOf(a) - ranks.indexOf(b)); // 順番にソート
-        renderTable();
-        updateMessage(`コンピュータ${computerIndex + 1}が ${card} を出しました。`);
-    } else {
-        computerHands[computerIndex].push(card); // 出せない場合は手札に戻す
-        updateMessage(`コンピュータ${computerIndex + 1}はパスしました。`);
     }
 }
 
