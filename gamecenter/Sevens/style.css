@@ -1,96 +1,44 @@
-/* 全体の背景やフォント設定 */
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: Arial, sans-serif;
+    background-color: #282c34;
+    color: white;
+    text-align: center;
     margin: 0;
     padding: 0;
-    background-color: #111; /* 少し明るめの黒 */
-    color: #d4ff88; /* 落ち着いた緑色 */
 }
 
-/* ヘッダーのスタイル */
-.header {
-    text-align: center;
-    padding: 20px;
-    background-color: #222; /* ヘッダー背景も少し明るめの黒 */
-    color: #d4ff88;
-    font-size: 2em;
-}
-
-/* ゲームコンテナのスタイル */
-.game-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(13, 50px);
+    gap: 10px;
     justify-content: center;
-    margin-top: 20px;
-    padding: 20px;
+    margin: 20px;
 }
 
-.hand, .table, .message {
-    margin: 20px 0;
-    padding: 10px;
-    background-color: #333; /* 暗いグレー */
-    border-radius: 10px;
-    box-shadow: 0 6px 12px rgba(212, 255, 136, 0.5);
-    width: 80%;
-    text-align: center;
-    color: #d4ff88;
-}
-
-/* ボタンの色合いを調整 */
-.actions {
-    display: flex;
-    gap: 20px;
-}
-
-.game-btn {
-    background-color: #333; /* 背景を少し明るく */
-    border: 2px solid #d4ff88;
-    color: #d4ff88;
-    padding: 10px 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.3s ease, background-color 0.3s ease;
-}
-
-.game-btn:hover {
-    background-color: #d4ff88;
-    color: #111; /* ホバー時の文字色はダークに */
-    transform: scale(1.1);
-}
-
-/* スートごとのカード行を表示 */
-.suit-row {
-    display: flex;
-    justify-content: center;
-    margin: 10px 0;
-}
-
-/* 各カードのスタイル */
-.suit-row span {
-    padding: 5px;
-    width: 30px;
-    text-align: center;
-    border: 1px solid #d4ff88;
-    margin-right: 5px;
+.card {
+    width: 50px;
+    height: 70px;
+    background-color: #fff;
     border-radius: 5px;
-    background-color: #333;
-    color: #d4ff88;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.5em;
+    color: black;
 }
 
-.suit-row span:not(:last-child) {
-    margin-right: 8px;
+.hidden {
+    background-color: #888;
+    color: #888;
 }
 
-/* レスポンシブ対応 */
-@media screen and (max-width: 768px) {
-    .game-container {
-        padding: 10px;
-    }
-    .hand, .table, .message {
-        width: 95%;
-    }
-    .game-btn {
-        padding: 8px 15px;
-    }
+#message {
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    cursor: pointer;
 }
