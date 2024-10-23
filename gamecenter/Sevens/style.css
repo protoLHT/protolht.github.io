@@ -1,49 +1,43 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: black;
+    color: green;
     text-align: center;
-    padding: 20px;
 }
 
-h1, h2 {
-    color: #333;
+#board {
+    margin: 20px;
 }
 
-#game-board, #hand-board {
-    margin: 20px 0;
+.suit {
+    margin: 10px;
+    font-size: 20px;
 }
 
-.board-card {
+.card {
     display: inline-block;
-    margin: 5px;
-    padding: 10px;
-    background-color: #f1c40f;
-    border: 1px solid #333;
-    border-radius: 5px;
+    margin: 0 5px;
+    padding: 5px;
+    border: 1px solid white;
+    width: 30px;
+    text-align: center;
 }
 
-.card-button {
-    margin: 5px;
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+.highlight {
+    background-color: yellow;
 }
 
-.card-button:hover {
-    background-color: #45a049;
-}
-
-.card-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
-
-#message {
+#controls {
     margin-top: 20px;
-    font-size: 1.2em;
-    color: #555;
+}
+
+#playerCards {
+    margin-top: 20px;
+}
+
+button {
+    margin: 10px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
 }
