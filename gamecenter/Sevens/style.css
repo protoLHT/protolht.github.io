@@ -3,16 +3,16 @@ body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #000;
-    color: #adff2f;
+    background-color: #111; /* 少し明るめの黒 */
+    color: #d4ff88; /* 落ち着いた緑色 */
 }
 
 /* ヘッダーのスタイル */
 .header {
     text-align: center;
     padding: 20px;
-    background-color: #000;
-    color: #adff2f;
+    background-color: #222; /* ヘッダー背景も少し明るめの黒 */
+    color: #d4ff88;
     font-size: 2em;
 }
 
@@ -29,23 +29,24 @@ body {
 .hand, .table, .message {
     margin: 20px 0;
     padding: 10px;
-    background-color: #1a1a1a;
+    background-color: #333; /* 暗いグレー */
     border-radius: 10px;
-    box-shadow: 0 6px 12px rgba(173, 255, 47, 0.5);
+    box-shadow: 0 6px 12px rgba(212, 255, 136, 0.5);
     width: 80%;
     text-align: center;
-    color: #adff2f;
+    color: #d4ff88;
 }
 
+/* ボタンの色合いを調整 */
 .actions {
     display: flex;
     gap: 20px;
 }
 
 .game-btn {
-    background-color: #1a1a1a;
-    border: 2px solid #adff2f;
-    color: #adff2f;
+    background-color: #333; /* 背景を少し明るく */
+    border: 2px solid #d4ff88;
+    color: #d4ff88;
     padding: 10px 20px;
     border-radius: 10px;
     cursor: pointer;
@@ -53,8 +54,8 @@ body {
 }
 
 .game-btn:hover {
-    background-color: #adff2f;
-    color: #000;
+    background-color: #d4ff88;
+    color: #111; /* ホバー時の文字色はダークに */
     transform: scale(1.1);
 }
 
