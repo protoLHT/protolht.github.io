@@ -57,7 +57,6 @@ body {
     color: #000; /* ホバー時は黒文字 */
 }
 
-
 /* コンテンツのスタイル */
 .container {
     display: flex;
@@ -66,11 +65,13 @@ body {
     max-width: 100%;
     margin: 20px auto;
     margin-top: 15vh; /* ヘッダーの高さ分スペースを追加 */
+    gap: 20px; /* 各ボタン間にスペースを追加 */
 }
 
 .content {
-    flex: 1 1 calc(33% - 20px); /* 3列表示にする */
+    flex: 1 1 calc(33% - 20px); /* 3列表示 */
     max-width: calc(33% - 20px); /* 幅を3等分にする */
+    min-width: 200px; /* ボタンが小さすぎないように */
     text-align: center;
     padding: 20px;
     margin: 10px;
