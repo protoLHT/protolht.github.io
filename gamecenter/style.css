@@ -77,4 +77,48 @@ body {
     margin: 10px;
     background-color: #1a1a1a; /* 黒に近いグレーの背景 */
     border-radius: 15px;
-    box-shadow: 0 6px 12px rgba(173, 255,
+    box-shadow: 0 6px 12px rgba(173, 255, 47, 0.5); /* 黄緑の影 */
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    min-width: 280px; /* 各コンテンツの最小幅を指定 */
+    position: relative; /* ホバーの動作を安定させるためにpositionを追加 */
+    z-index: 1;
+}
+
+/* ホバー時にスタイルが正しく適用されるように調整 */
+.content:hover {
+    transform: translateY(-10px);
+    background-color: #adff2f; /* ホバー時に黄緑 */
+    color: #000; /* ホバー時は黒文字 */
+    z-index: 10; /* ホバー時にコンテンツが前面に表示されるように */
+}
+
+/* ボタンを横幅一杯に広げる */
+.content a {
+    text-decoration: none;
+    color: #adff2f; /* 黄緑文字 */
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    padding: 10px 0; /* パディングの上下にスペースを追加 */
+    cursor: pointer;
+    border: 2px solid #adff2f; /* 黄緑のボーダー */
+    border-radius: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    width: 100%; /* ボタンをコンテンツの幅一杯に広げる */
+    box-sizing: border-box; /* ボーダーを含めて幅を計算 */
+}
+
+/* ボタンホバー時にスタイルが適用されるように修正 */
+.content a:hover {
+    background-color: #adff2f; /* ホバー時に黄緑 */
+    color: #000; /* ホバー時は黒文字 */
+}
+
+/* Aboutセクションのスタイル */
+.about-section {
+    text-align: center;
+    padding: 50px 20px;
+    margin: 0 auto;
+    background-color: #1a1a1a;
+    color: #adff2f;
+}
