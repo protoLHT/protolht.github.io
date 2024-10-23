@@ -1,62 +1,3 @@
-/* 全体の背景やフォント設定 */
-body {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #000; /* 黒背景 */
-    color: #adff2f; /* 黄緑文字 */
-}
-
-/* ヘッダーのスタイル */
-.header {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    height: 10vh;
-    background-color: #000; /* 黒背景 */
-    color: #adff2f; /* 黄緑文字 */
-    display: flex;
-    align-items: center;
-    padding-left: 20px;
-    z-index: 2;
-}
-
-.header h1 {
-    margin: 0;
-    letter-spacing: 6px;
-    color: #adff2f; /* 黄緑文字 */
-}
-
-/* ナビゲーションリンクのスタイル */
-.nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    background-color: #000; /* 黒背景 */
-}
-
-.nav a {
-    text-decoration: none;
-    color: #adff2f; /* 黄緑文字 */
-    font-weight: bold;
-    font-size: 18px;
-    cursor: pointer;
-    padding: 10px 25px;
-    background-color: #000; /* 黒背景 */
-    border: 2px solid #adff2f; /* 黄緑のボーダー */
-    border-radius: 30px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
-}
-
-.nav a:hover {
-    transform: scale(1.2);
-    box-shadow: 0 8px 25px rgba(173, 255, 47, 0.6); /* 黄緑の影 */
-    background-color: #adff2f; /* ホバー時に黄緑 */
-    color: #000; /* ホバー時は黒文字 */
-}
-
 /* コンテンツのスタイル */
 .container {
     display: flex;
@@ -121,4 +62,3 @@ body {
         max-width: 100%;
     }
 }
-
