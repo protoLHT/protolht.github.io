@@ -4,7 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>七並べ</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 全体の背景やフォント設定 */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #adff2f;
+        }
+
+        /* ヘッダーのスタイル */
+        .header {
+            text-align: center;
+            padding: 20px;
+            background-color: #000;
+            color: #adff2f;
+            font-size: 2em;
+        }
+
+        /* ゲームコンテナのスタイル */
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            padding: 20px;
+        }
+
+        .hand, .table, .message {
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #1a1a1a;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(173, 255, 47, 0.5);
+            width: 80%;
+            text-align: center;
+            color: #adff2f;
+        }
+
+        /* ボタンのデザイン */
+        .actions {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .game-btn {
+            background-color: #1a1a1a;
+            border: 2px solid #adff2f;
+            color: #adff2f;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .game-btn:hover {
+            background-color: #adff2f;
+            color: #000;
+            transform: scale(1.1);
+        }
+
+        /* レスポンシブ対応 */
+        @media screen and (max-width: 768px) {
+            .game-container {
+                padding: 10px;
+            }
+            .hand, .table, .message {
+                width: 95%;
+            }
+            .game-btn {
+                padding: 8px 15px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header class="header">
@@ -21,6 +96,163 @@
         </div>
     </div>
 
-    <script src="javascript.js"></script>
+    <script>
+        const suits = ['ハート', 'ダイヤ', 'クラブ', 'スペード'];
+        const ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+        let deck = [];
+        let playerHand = [];
+        let computerHands = [[], [], []];
+        let table = {
+            'ハート': ['7'], 'ダイヤ': ['7'], 'クラブ': ['7'], 'スペード': ['7']
+        };
+        let passCount = 0;
+        let currentPlayer = 0;
+
+        function createDeck() {
+            for (let suit of suits) {
+                for (let rank of ranks) {
+                    if (rank !== '7') {
+                        deck.push(`${suit}${rank}`);
+                    }
+                }
+            }
+        }
+
+        function shuffleDeck(deck) {
+            for (let i = deck.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [deck[i], deck[j]] = [deck[j], deck[i]];
+            }
+        }
+
+        function dealCards() {
+            while (deck.length) {
+                playerHand.push(deck.pop());
+                computerHands[0].push(deck.pop());
+                computerHands[1].push(deck.pop());
+                computerHands[2].push(deck.pop());
+            }
+        }
+
+        function renderHand() {
+            const playerHandDiv = document.getElementById('playerHand');
+            playerHandDiv.innerHTML = 'あなたの手札: ' + playerHand.join(', ');
+        }
+
+        function renderTable() {
+            const gameTableDiv = document.getElementById('gameTable');
+            let tableDisplay = '場: ';
+            for (let suit in table) {
+                tableDisplay += `${suit}: ${table[suit].join(', ')} | `;
+            }
+            gameTableDiv.innerHTML = tableDisplay;
+        }
+
+        function updateMessage(msg) {
+            const gameMessage = document.getElementById('gameMessage');
+            gameMessage.innerHTML = msg;
+        }
+
+        function canPlayCard(card) {
+            const suit = card.slice(0, -1);
+            const rank = card.slice(-1);
+            const tableRanks = table[suit];
+
+            if (tableRanks.includes(rank)) {
+                return false;
+            }
+
+            const cardIndex = ranks.indexOf(rank);
+            const minTableRank = ranks.indexOf(tableRanks[0]);
+            const maxTableRank = ranks.indexOf(tableRanks[tableRanks.length - 1]);
+
+            return cardIndex === minTableRank - 1 || cardIndex === maxTableRank + 1;
+        }
+
+        function playCard() {
+            if (playerHand.length === 0) {
+                updateMessage('全ての手札を出しました。あなたの勝利です！');
+                endGame();
+                return;
+            }
+
+            const card = playerHand.pop();
+            if (canPlayCard(card)) {
+                const suit = card.slice(0, -1);
+                table[suit].push(card);
+                table[suit].sort((a, b) => ranks.indexOf(a) - ranks.indexOf(b));
+                renderHand();
+                renderTable();
+                updateMessage(`${card} を出しました。`);
+            } else {
+                playerHand.push(card);
+                updateMessage(`${card} は場に出せません。`);
+            }
+
+            if (playerHand.length === 0) {
+                updateMessage('全ての手札を出しました。あなたの勝利です！');
+                endGame();
+            } else {
+                nextTurn();
+            }
+        }
+
+        function computerPlayCard(computerIndex) {
+            if (computerHands[computerIndex].length === 0) {
+                updateMessage(`コンピュータ${computerIndex + 1}の勝利です！`);
+                endGame();
+                return;
+            }
+
+            const card = computerHands[computerIndex].pop();
+            if (canPlayCard(card)) {
+                const suit = card.slice(0, -1);
+                table[suit].push(card);
+                table[suit].sort((a, b) => ranks.indexOf(a) - ranks.indexOf(b));
+                renderTable();
+                updateMessage(`コンピュータ${computerIndex + 1}が ${card} を出しました。`);
+            } else {
+                computerHands[computerIndex].push(card);
+                updateMessage(`コンピュータ${computerIndex + 1}はパスしました。`);
+            }
+        }
+
+        function nextTurn() {
+            if (currentPlayer === 0) {
+                currentPlayer = 1;
+            } else if (currentPlayer === 1 || currentPlayer === 2 || currentPlayer === 3) {
+                computerPlayCard(currentPlayer - 1);
+                currentPlayer = (currentPlayer + 1) % 4;
+            }
+
+            if (currentPlayer === 0) {
+                updateMessage('あなたのターンです。カードを出してください。');
+            }
+        }
+
+        function endGame() {
+            document.getElementById('passBtn').disabled = true;
+            document.getElementById('playBtn').disabled = true;
+        }
+
+        document.getElementById('passBtn').addEventListener('click', () => {
+            pass();
+            nextTurn();
+        });
+
+        document.getElementById('playBtn').addEventListener('click', playCard);
+
+        function pass() {
+            passCount++;
+            updateMessage('パスしました。');
+        }
+
+        createDeck();
+        shuffleDeck(deck);
+        dealCards();
+        renderHand();
+        renderTable();
+        updateMessage('ゲーム開始！');
+    </script>
 </body>
 </html>
