@@ -61,6 +61,7 @@ body {
 /* コンテンツのスタイル */
 .container {
     display: flex;
+    flex-wrap: wrap; /* コンテンツを複数行にする */
     justify-content: space-between;
     max-width: 100%;
     margin: 20px auto;
@@ -68,7 +69,8 @@ body {
 }
 
 .content {
-    flex: 1;
+    flex: 1 1 calc(33% - 20px); /* 3列表示にする */
+    max-width: calc(33% - 20px); /* 幅を3等分にする */
     text-align: center;
     padding: 20px;
     margin: 10px;
@@ -101,10 +103,18 @@ body {
     background-color: #adff2f; /* ホバー時に黄緑 */
     color: #000; /* ホバー時は黒文字 */
 }
+
 /* レスポンシブ対応 */
 @media screen and (max-width: 768px) {
     .content {
         flex: 1 1 calc(50% - 20px); /* モバイルで2列にする */
         max-width: calc(50% - 20px);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .content {
+        flex: 1 1 100%; /* 小さな画面では1列表示 */
+        max-width: 100%;
     }
 }
