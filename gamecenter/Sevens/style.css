@@ -31,7 +31,7 @@ body {
     padding: 10px;
     background-color: #333; /* 暗いグレー */
     border-radius: 10px;
-    box-shadow: 0 6px 12px rgba(212, 255, 136, 0.5);
+    box-shadow: 0 6px 12px rgba(212, 255, 136, 0.5); /* シャドウエフェクト */
     width: 80%;
     text-align: center;
     color: #d4ff88;
@@ -44,7 +44,7 @@ body {
 }
 
 .game-btn {
-    background-color: #333; /* 背景を少し明るく */
+    background-color: #333; /* ボタンの背景を少し明るく */
     border: 2px solid #d4ff88;
     color: #d4ff88;
     padding: 10px 20px;
@@ -53,10 +53,16 @@ body {
     transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
+/* ボタンのホバー時効果 */
 .game-btn:hover {
     background-color: #d4ff88;
     color: #111; /* ホバー時の文字色はダークに */
     transform: scale(1.1);
+}
+
+/* ボタンのクリック時効果 */
+.game-btn:active {
+    transform: scale(0.95); /* クリック時の縮小効果 */
 }
 
 /* レスポンシブ対応 */
