@@ -1,13 +1,10 @@
-<head>
-    <style>
-    /* 全体の背景やフォント設定 */
-    body {
-        font-family: 'Poppins', sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #000; /* 黒背景 */
-        color: #adff2f; /* 黄緑文字 */
-    }
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000; /* 黒背景 */
+    color: #adff2f; /* 黄緑文字 */
+}
 
     /* ヘッダーのスタイル */
     .header {
@@ -135,8 +132,3 @@
             flex: 1 1 100%; /* 幅を100%にして1列表示にする */
         }
     }
-    </style>
-</head>
-<body>
-    <!-- HTMLコンテンツをここに追加 -->
-</body>
