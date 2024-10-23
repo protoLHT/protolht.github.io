@@ -106,16 +106,18 @@ body {
 }
 
 /* レスポンシブ対応 */
-@media screen and (max-width: 768px) {
+/* タブレットサイズで2列表示 */
+@media screen and (max-width: 1024px) {
     .content {
-        flex: 1 1 calc(50% - 20px); /* モバイルで2列にする */
+        flex: 1 1 calc(50% - 20px); /* 2列表示 */
         max-width: calc(50% - 20px);
     }
 }
 
-@media screen and (max-width: 480px) {
+/* スマートフォンサイズで1列表示 */
+@media screen and (max-width: 768px) {
     .content {
-        flex: 1 1 100%; /* 小さな画面では1列表示 */
+        flex: 1 1 100%; /* 1列表示 */
         max-width: 100%;
     }
 }
