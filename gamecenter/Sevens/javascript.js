@@ -1,56 +1,22 @@
-const suits = ['♠', '♥', '♦', '♣'];
-let deck = [];
-let playerHand = [];
-let table = [];
+// 手札を表す配列
+const hand = ['7♠', '9♥', '5♦', '6♣', '8♠']; // 例としていくつかのカードを手札にする
 
-function createDeck() {
-    deck = [];
-    for (let suit of suits) {
-        for (let i = 1; i <= 13; i++) {
-            deck.push({ suit: suit, value: i });
-        }
-    }
-    deck = deck.sort(() => Math.random() - 0.5);
-}
-
-function dealCards() {
-    playerHand = deck.splice(0, 13);
-    table = Array(13).fill(null);
-}
-
-function renderTable() {
-    const gameBoard = document.getElementById('game-board');
-    gameBoard.innerHTML = '';
-    for (let i = 0; i < 13; i++) {
-        const card = document.createElement('div');
-        card.classList.add('card');
-        card.innerHTML = table[i] ? `${table[i].suit}${table[i].value}` : '?';
-        card.addEventListener('click', () => playCard(i));
-        gameBoard.appendChild(card);
-    }
-}
-
-function playCard(index) {
-    if (table[index] || playerHand.length === 0) return;
-
-    const validCard = playerHand.find(card => card.value === (index + 1));
-    if (validCard) {
-        table[index] = validCard;
-        playerHand = playerHand.filter(card => card !== validCard);
-        renderTable();
-        updateMessage('カードを置きました！');
-    } else {
-        updateMessage('置けるカードがありません。');
-    }
-}
-
-function updateMessage(msg) {
-    document.getElementById('message').textContent = msg;
-}
-
+// ゲームを開始するボタン
 document.getElementById('start-game').addEventListener('click', () => {
-    createDeck();
-    dealCards();
-    renderTable();
-    updateMessage('ゲーム開始！');
+    const gameBoard = document.getElementById('game-board');
+    gameBoard.innerHTML = ''; // ゲームボードを初期化
+    
+    // 手札を動的に表示する
+    hand.forEach((card, index) => {
+        const button = document.createElement('button');
+        button.innerText = card; // カード名をボタンに表示
+        button.id = `card-${index}`; // 各ボタンにユニークなIDを付与
+        button.classList.add('card-button'); // クラス名を追加（CSS用）
+        button.addEventListener('click', () => {
+            document.getElementById('message').innerText = `${card} をプレイしました。`;
+            // クリックされたボタンを非表示にするなど、後続の処理を追加
+            button.disabled = true; // ボタンを無効化する例
+        });
+        gameBoard.appendChild(button); // ゲームボードにボタンを追加
+    });
 });
