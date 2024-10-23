@@ -5,6 +5,7 @@ let playerHand = [];
 let computerHands = [[], [], []];
 let table = [];
 let passCount = 0;
+let currentPlayer = 0; // 0: プレイヤー、1~3: コンピュータ
 
 function createDeck() {
     for (let suit of suits) {
@@ -72,6 +73,35 @@ function playCard() {
         endGame();
     } else {
         updateMessage(`${card} を出しました。`);
+        nextTurn(); // 次のプレイヤーのターンに進む
+    }
+}
+
+function computerPlayCard(computerIndex) {
+    if (computerHands[computerIndex].length === 0) {
+        updateMessage(`コンピュータ${computerIndex + 1}の勝利です！`);
+        endGame();
+        return;
+    }
+
+    const card = computerHands[computerIndex].pop();
+    table.push(card);
+    renderTable();
+    updateMessage(`コンピュータ${computerIndex + 1}が ${card} を出しました。`);
+}
+
+function nextTurn() {
+    if (currentPlayer === 0) {
+        // プレイヤーのターン
+        currentPlayer = 1; // 次はコンピュータ1のターン
+    } else if (currentPlayer === 1 || currentPlayer === 2 || currentPlayer === 3) {
+        // コンピュータのターン
+        computerPlayCard(currentPlayer - 1); // コンピュータの手札からカードを出す
+        currentPlayer = (currentPlayer + 1) % 4; // 次のプレイヤーに回す
+    }
+
+    if (currentPlayer === 0) {
+        updateMessage('あなたのターンです。カードを出してください。');
     }
 }
 
@@ -80,7 +110,11 @@ function endGame() {
     document.getElementById('playBtn').disabled = true;
 }
 
-document.getElementById('passBtn').addEventListener('click', pass);
+document.getElementById('passBtn').addEventListener('click', () => {
+    pass();
+    nextTurn(); // パスした後も次のプレイヤーに進む
+});
+
 document.getElementById('playBtn').addEventListener('click', playCard);
 
 createDeck();
